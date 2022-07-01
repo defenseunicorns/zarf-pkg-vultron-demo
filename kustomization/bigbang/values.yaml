@@ -5,9 +5,8 @@ registryCredentials:
   username: "zarf-pull"
   password: "###ZARF_REGISTRY_AUTH_PULL###"
 
-git:
-  existingSecret: "private-git-server"
-
+#git:
+#  existingSecret: "private-git-server"
 #networkPolicies:
 #  enabled: true
 #  # When in prod use a real CIDR. Don't do this, it isn't secure. This is done here since it is a demo and the CIDR changes based on which Linux distro you are running on.

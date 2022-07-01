@@ -16,6 +16,6 @@ eksctl create cluster -f eks-cluster.yaml
 
 # Give AWS access to other team members
 for user in ${USER_LIST[@]}; do
-    eksctl create iamidentitymapping --cluster kuvevirt-test-cluster --region=us-east-1 --arn \
+    eksctl create iamidentitymapping --cluster eks-hncd-test-cluster --region=us-east-1 --arn \
     arn:aws:iam::${AWS_ACCOUNT_ID}:user/$user --group system:masters --no-duplicate-arns
 done

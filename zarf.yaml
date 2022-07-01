@@ -54,11 +54,6 @@ components:
       - registry1.dso.mil/ironbank/opensource/prometheus/alertmanager:v0.24.0
       - registry1.dso.mil/ironbank/opensource/prometheus/node-exporter:v1.3.1
       - registry1.dso.mil/ironbank/opensource/prometheus/prometheus:v2.35.0
-
-
-  - name: big-bang-core
-    description: "Deploy Big Bang Core with a standard configuration"
-    group: big-bang-variant
     manifests:
       - name: big-bang-config
         kustomizations:

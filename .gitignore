@@ -1,0 +1,4 @@
+.env
+.terraform
+*.tar.zst
+.idea
