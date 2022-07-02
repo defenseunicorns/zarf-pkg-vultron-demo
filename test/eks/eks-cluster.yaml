@@ -15,7 +15,7 @@ managedNodeGroups:
   - name: eks-hncd-workers-1
     labels: { role: workers }
     instanceType: m5.xlarge
-    desiredCapacity: 3
+    desiredCapacity: 4
     privateNetworking: true
     volumeSize: 100
     volumeType: gp2
