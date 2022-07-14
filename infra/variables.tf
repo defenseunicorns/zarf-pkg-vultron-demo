@@ -28,7 +28,7 @@ variable "virtual_network" {
 }
 
 variable "disk_store" {
-  default = "DiskStore01"
+  default = "datastore1"
 }
 
 variable "vm_hostname" {

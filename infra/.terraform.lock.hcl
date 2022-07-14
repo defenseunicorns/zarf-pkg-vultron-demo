@@ -3,8 +3,9 @@
 
 provider "registry.terraform.io/hashicorp/template" {
   version = "2.2.0"
-  hashes  = [
+  hashes = [
     "h1:0wlehNaxBX7GJQnPfQwTNvvAf38Jm0Nv7ssKGMaG6Og=",
+    "h1:94qn780bi1qjrbC3uQtjJh3Wkfwd5+tTtJHOb7KTg9w=",
     "zh:01702196f0a0492ec07917db7aaa595843d8f171dc195f4c988d2ffca2a06386",
     "zh:09aae3da826ba3d7df69efeb25d146a1de0d03e951d35019a0f80e4f58c89b53",
     "zh:09ba83c0625b6fe0a954da6fbd0c355ac0b7f07f86c91a2a97849140fea49603",
@@ -20,8 +21,9 @@ provider "registry.terraform.io/hashicorp/template" {
 
 provider "registry.terraform.io/josenk/esxi" {
   version = "1.10.2"
-  hashes  = [
+  hashes = [
     "h1:IqQaUNt089YGGFXquDT/1Gow2NcsDyaF3S8IuPNMoNE=",
+    "h1:wXICE6ZUfwoNWBWz89tenSZ4UDtYMBFJB2WKGE95Q7M=",
     "zh:0d14aac5ad4283d9b3cbc4ac7ee5dcfb8c024f5d7522c68362e1aaaeec26f95d",
     "zh:1545bf1b848bc7a4e2e4b6a4ae6a0b28408e9acf8d5f5f490aaa1817ce9a22e2",
     "zh:171f80373ff5322aede53524046132cf9c6a4bbadf7e01b8fdf60c801260f5fe",
