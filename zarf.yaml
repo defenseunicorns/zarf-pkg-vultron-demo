@@ -1,7 +1,7 @@
 kind: ZarfPackageConfig
 metadata:
   name: big-bang-core-demo
-  description: "Deploy Big Bang Core - HNCD"
+  description: "Deploy Big Bang and Baffles - HNCD"
   # Big Bang / Iron Bank are only amd64
   architecture: amd64
 
@@ -67,3 +67,40 @@ components:
       - name: big-bang-config
         kustomizations:
           - "kustomization/bigbang"
+
+  - name: cdi
+    required: true
+    charts:
+      - name: cdi
+        url: https://repo1.dso.mil/platform-one/big-bang/apps/sandbox/cdi.git
+        version: 0.0.1-bb.1
+        gitPath: chart
+        namespace: cdi
+        valuesFiles:
+          - cdi-values.yaml
+    images:
+      - quay.io/kubevirt/cdi-operator:v1.52.0
+      - quay.io/kubevirt/cdi-controller:v1.52.0
+      - quay.io/kubevirt/cdi-importer:v1.52.0
+      - quay.io/kubevirt/cdi-cloner:v1.52.0
+      - quay.io/kubevirt/cdi-apiserver:v1.52.0
+      - quay.io/kubevirt/cdi-uploadserver:v1.52.0
+      - quay.io/kubevirt/cdi-uploadproxy:v1.52.0
+
+  - name: kubevirt
+    required: true
+    charts:
+      - name: kubevirt
+        url: https://repo1.dso.mil/platform-one/big-bang/apps/third-party/kubevirt.git
+        version: 0.0.1-bb.1
+        gitPath: chart
+        namespace: kubevirt
+        valuesFiles:
+          - kubevirt-values.yaml
+    images:
+      - registry.dso.mil/platform-one/big-bang/apps/third-party/kubevirt/virt-api:v0.54.0
+      - registry.dso.mil/platform-one/big-bang/apps/third-party/kubevirt/virt-controller:v0.54.0
+      - registry.dso.mil/platform-one/big-bang/apps/third-party/kubevirt/virt-launcher:v0.54.0
+      - registry.dso.mil/platform-one/big-bang/apps/third-party/kubevirt/virt-handler:v0.54.0
+      - registry.dso.mil/platform-one/big-bang/apps/third-party/kubevirt/virt-operator:v0.54.0
+      - quay.io/kubevirt/virtio-container-disk
