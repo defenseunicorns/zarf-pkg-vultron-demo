@@ -1,0 +1,96 @@
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  annotations:
+    pv.kubernetes.io/provisioned-by: rancher.io/local-path
+  finalizers:
+    - kubernetes.io/pv-protection
+  name: pfsense-pv
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 30G
+  hostPath:
+    path: /var/lib/rancher/k3s/storage/local-pv
+    type: DirectoryOrCreate
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - k8s-node01
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: pfsense-pv
+  volumeMode: Filesystem
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pfsense-pvc
+spec:
+  storageClassName: pfsense-pv
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+---
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  name: pfsense
+spec:
+  running: false
+  template:
+    metadata:
+      labels:
+        kubevirt.io/domain: pfsense
+    spec:
+      domain:
+        cpu:
+          cores: 4
+        devices:
+          interfaces:
+            - name: default
+              model: e1000
+              masquerade: {}
+              ports:
+                - port: 80
+                - port: 22
+                - port: 443
+          disks:
+            - bootOrder: 1
+              disk:
+                bus: sata
+              name: harddrive
+            - bootOrder: 2
+              cdrom:
+                bus: sata
+              name: cdromiso
+                #          - bootOrder: 3
+                #cdrom:
+                #bus: sata
+              #name: virtiocontainerdisk
+        machine:
+          type: q35
+        resources:
+          requests:
+            memory: 12G
+      networks:
+        - name: default
+          pod: {}
+      volumes:
+        - name: cdromiso
+          persistentVolumeClaim:
+            claimName: iso-pfsense
+        - name: harddrive
+          persistentVolumeClaim:
+            claimName: pfsense-pvc
+              # - containerDisk:
+              #image: quay.io/kubevirt/virtio-container-disk
+            #name: virtiocontainerdisk
